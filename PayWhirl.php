@@ -173,11 +173,27 @@ class PayWhirl{
 
     /**
      * Subscribe a customer to a plan
-     * @param  int $id Subscription ID
+     * @param  int $customerID
+     * @param  int $planID
+     * @param  int $trialEnd
+     * @param  int $promoID
+     * @param  int $quantity
      * @return Subscription Object
      */
-    public function subscribeCustomer($customerData){
-        return $this->post('/subscribe/customer',$customerData);
+    public function subscribeCustomer($customerID, $planID, $trialEnd = false,
+                                      $promoID = false, $quantity = 1 ) {
+        $data = array(
+            'customer_id' => $customerID,
+            'plan_id' => $planID,
+            'quantity' => $quantity
+        );
+        if ($trialEnd) {
+            $data['trial_end'] = $trialEnd;
+        }
+        if ($promoID) {
+            $data['promo_id'] = $promoID;
+        }
+        return $this->post('/subscribe/customer', $data);
     }
 
      /**
