@@ -360,6 +360,15 @@ class PayWhirl{
     }
 
     /**
+     * Send a system generated email to a customer
+     * @param  array $data options
+     * @return success or error
+     */
+    public function sendEmail($data){
+        return $this->post('/send-email', $data);
+    }
+
+    /**
      * Get authenticated account's information
      * @return PayWhirl account object
      */
