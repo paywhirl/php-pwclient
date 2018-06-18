@@ -57,6 +57,33 @@ class PayWhirl{
         return $this->get('/customer/'.$id);
     }
 
+    /**
+     * Get all addresses associated with a customer
+     * @param  int $id Customer ID
+     * @return Customer Object
+     */
+    public function getAddresses($id){
+        return $this->get('/customer/addresses'.$id);
+    }
+
+    /**
+     * Get a single address associated with a customer
+     * @param  int $id Address ID
+     * @return Customer Object
+     */
+    public function getAddress($id){
+        return $this->get('/customer/address'.$id);
+    }
+
+    /**
+     * Get a full customer profile by customer ID or email (customer, addresses, and profile questions)
+     * @param  int $id Address ID
+     * @return Customer Object
+     */
+    public function getProfile($id){
+        return $this->get('/customer/profile'.$id);
+    }
+
      /**
      * Create a customer
      * @param  int $data Customer data
@@ -236,8 +263,40 @@ class PayWhirl{
      * @param  int $id Customer ID
      * @return Invoices Object
      */
-    public function getInvoices($id){
-        return $this->get('/invoices/'.$id);
+    public function getInvoices($id, $all = 0){
+        if ($all != 0) {
+            $data = array(
+                'all' => $all,
+            );
+        }
+        return $this->get('/invoices/'.$id, $data);
+    }
+
+     /**
+     * Process an upcoming invoice immediately
+     * @param  int $invoice_id 
+     * @return Invoice Object
+     */
+    public function processInvoice($invoice_id){
+        return $this->post("/invoices/{$invoice_id}/process");
+    }
+
+     /**
+     * Update a card for an invoice
+     * @param  int $invoice_id 
+     * @return Invoice Object
+     */
+    public function updateInvoiceCard($invoice_id, $card_id){
+        return $this->post("/invoices/{$invoice_id}/card", $card_id);
+    }
+
+     /**
+     * Update a card for an invoice
+     * @param  array $data 
+     * @return Invoice Object
+     */
+    public function createInvoice($data){
+        return $this->post("/invoices/", $data);
     }
 
     /**
