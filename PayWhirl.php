@@ -228,11 +228,14 @@ class PayWhirl{
      * @param  int $id Subscription ID
      * @return Subscription Object
      */
-    public function updateSubscription($subscription_id,$plan_id){
+    public function updateSubscription($subscription_id, $plan_id, $quantity = NULL){
         $data = array(
             'subscription_id' => $subscription_id,
             'plan_id' => $plan_id
         );
+        if ($quantity != NULL) {
+            $data['quantity'] = $quantity;
+        }
         return $this->post('/update/subscription',$data);
     }
 
