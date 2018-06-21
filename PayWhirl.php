@@ -86,7 +86,7 @@ class PayWhirl{
 
      /**
      * Create a customer
-     * @param  int $data Customer data
+     * @param  array $data Customer data
      * @return Customer Object
      */
     public function createCustomer($data){
@@ -96,7 +96,7 @@ class PayWhirl{
 
     /**
      * Create a customer
-     * @param  int $data Customer data
+     * @param  array $data Customer data
      * @return Customer Object
      */
     public function updateCustomer($data){
@@ -105,7 +105,7 @@ class PayWhirl{
 
     /**
      * Update a customer's answer to a profile questions
-     * @param  int $data Answer data
+     * @param  array $data Answer data
      * @return Answer Object
      */
     public function updateAnswer($data){
@@ -153,7 +153,7 @@ class PayWhirl{
 
     /**
      * Create a plan
-     * @param  int $data Plan data
+     * @param  array $data Plan data
      * @return Plan Object
      */
     public function createPlan($data){
@@ -162,7 +162,7 @@ class PayWhirl{
 
     /**
      * Update a plan
-     * @param  int $data Plan data
+     * @param  array $data Plan data
      * @return Plan Object
      */
     public function updatePlan($data){
@@ -202,7 +202,7 @@ class PayWhirl{
      * Subscribe a customer to a plan
      * @param  int $customerID
      * @param  int $planID
-     * @param  int $trialEnd
+     * @param  bool $trialEnd
      * @param  int $promoID
      * @param  int $quantity
      * @return Subscription Object
