@@ -202,7 +202,7 @@ class PayWhirl{
      * Subscribe a customer to a plan
      * @param  int $customerID
      * @param  int $planID
-     * @param  bool $trialEnd
+     * @param  int $trialEnd
      * @param  int $promoID
      * @param  int $quantity
      * @return Subscription Object
