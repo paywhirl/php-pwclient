@@ -1,0 +1,8 @@
+{
+    "name": "paywhirl/php-pwclient",
+    "autoload": {
+        "psr-0" : {
+            "PayWhirl" : "."
+        }
+    }
+}
