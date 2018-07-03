@@ -277,7 +277,7 @@ class PayWhirl{
 
      /**
      * Process an upcoming invoice immediately
-     * @param  int $invoice_id 
+     * @param  int $invoice_id
      * @return Invoice Object
      */
     public function processInvoice($invoice_id){
@@ -286,7 +286,8 @@ class PayWhirl{
 
      /**
      * Update a card for an invoice
-     * @param  int $invoice_id 
+     * @param  int $invoice_id
+     * @param int $card_id
      * @return Invoice Object
      */
     public function updateInvoiceCard($invoice_id, $card_id){
@@ -295,7 +296,17 @@ class PayWhirl{
 
      /**
      * Update a card for an invoice
-     * @param  array $data 
+     * @param  int $invoice_id
+     * @param  array $line_items
+     * @return Invoice Object
+     */
+    public function updateInvoiceItems($invoice_id, $line_items){
+        return $this->post("/invoices/{$invoice_id}/items", $line_items);
+    }
+
+     /**
+     * Create a new invoice
+     * @param  array $data
      * @return Invoice Object
      */
     public function createInvoice($data){
