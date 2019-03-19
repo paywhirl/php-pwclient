@@ -84,7 +84,7 @@ class PayWhirl{
         return $this->get('/customer/profile'.$id);
     }
 
-     /**
+    /**
      * Create a customer
      * @param  array $data Customer data
      * @return Customer Object
@@ -92,6 +92,16 @@ class PayWhirl{
     public function createCustomer($data){
         return  $this->post('/create/customer',$data);
 
+    }
+
+    /**
+     * Authenticate a customer
+     * @param string $email email address
+     * @param string $password password bcrypt hash or plain text
+     * @return array ['status' => 'success' or 'failure']
+     */
+    public function authCustomer($email, $password){
+        return $this->post('/auth/customer', compact('email', 'password'));
     }
 
     /**
