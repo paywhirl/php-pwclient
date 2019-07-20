@@ -285,13 +285,22 @@ class PayWhirl{
         return $this->get('/invoices/'.$id, $data);
     }
 
-     /**
+    /**
      * Process an upcoming invoice immediately
      * @param  int $invoice_id
      * @return Invoice Object
      */
     public function processInvoice($invoice_id){
         return $this->post("/invoices/{$invoice_id}/process");
+    }
+
+    /**
+     * Mark an upcoming invoice as paid
+     * @param  int $invoice_id
+     * @return Invoice Object
+     */
+    public function markInvoiceAsPaid($invoice_id){
+        return $this->post("/invoices/{$invoice_id}/mark-as-paid");
     }
 
      /**
@@ -548,7 +557,4 @@ class PayWhirl{
         curl_close($ch);
         return json_decode($output);
     }
-
-
-
 }
