@@ -369,6 +369,16 @@ class PayWhirl{
     }
 
     /**
+     * Refund a charge
+     * @param  int $id Charge ID
+     * @param  array $data  data
+     * @return Plan Object
+     */
+    public function refundCharge($id, $data){
+        return $this->post('/refund/charge/'.$id, $data);
+    }
+
+    /**
      * Get a card
      * @param  int $id Card ID
      * @return Gateway Object
