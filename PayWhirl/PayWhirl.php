@@ -114,6 +114,20 @@ class PayWhirl{
     }
 
     /**
+     * Delete a customer
+     * @param  int $id Customer ID
+     * @param  boolean $forget delete and obfuscate customer data
+     * @return boolean
+     */
+    public function deleteCustomer($id, $forget = null){
+        $data['id'] = $id;
+        if (!is_null($forget)) {
+            $data['forget'] = $forget;
+        }
+        return $this->post('/delete/customer', $data);
+    }
+
+    /**
      * Update a customer's answer to a profile questions
      * @param  array $data Answer data
      * @return Answer Object
