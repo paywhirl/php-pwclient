@@ -302,10 +302,11 @@ class PayWhirl{
     /**
      * Process an upcoming invoice immediately
      * @param  int $invoice_id
+     * @param  array $data
      * @return Invoice Object
      */
-    public function processInvoice($invoice_id){
-        return $this->post("/invoices/{$invoice_id}/process");
+    public function processInvoice($invoice_id, $data = []){
+        return $this->post("/invoices/{$invoice_id}/process", $data);
     }
 
     /**
