@@ -318,6 +318,25 @@ class PayWhirl{
         return $this->post("/invoices/{$invoice_id}/mark-as-paid");
     }
 
+    /**
+     * Add a promo code to an upcoming invoice
+     * @param  int $invoice_id
+     * @param  string $promo_cde
+     * @return Invoice Object
+     */
+    public function addPromoCodeToInvoice($invoice_id, $promo_code){
+        return $this->post("/invoices/{$invoice_id}/add-promo", ['promo_code' => $promo_code]);
+    }
+
+    /**
+     * Remove promo code from an upcoming invoice
+     * @param  int $invoice_id
+     * @return Invoice Object
+     */
+    public function removePromoCodeFromInvoice($invoice_id){
+        return $this->post("/invoices/{$invoice_id}/remove-promo");
+    }
+
      /**
      * Update a card for an invoice
      * @param  int $invoice_id
