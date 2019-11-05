@@ -367,6 +367,16 @@ class PayWhirl{
     }
 
     /**
+     * Delete an invoice
+     * @param  int $id Invoice ID
+     * @return boolean
+     */
+    public function deleteInvoice($id){
+        $data['id'] = $id;
+        return $this->post('/delete/invoice',$data);
+    }
+
+    /**
      * Get a list of payment gateways
      * @return Gateways Collection
      */
