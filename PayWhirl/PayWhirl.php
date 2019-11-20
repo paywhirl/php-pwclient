@@ -252,13 +252,26 @@ class PayWhirl{
      * @param  int $id Subscription ID
      * @return Subscription Object
      */
-    public function updateSubscription($subscription_id, $plan_id, $quantity = NULL){
+    public function updateSubscription($subscription_id, $plan_id, $quantity = NULL, $address_id = NULL,
+                                       $installments_left = NULL, $trial_end = NULL, $card_id = NULL){
         $data = array(
             'subscription_id' => $subscription_id,
             'plan_id' => $plan_id
         );
         if ($quantity != NULL) {
             $data['quantity'] = $quantity;
+        }
+        if ($address_id != NULL) {
+            $data['address_id'] = $address_id;
+        }
+        if ($installments_left != NULL) {
+            $data['installments_left'] = $installments_left;
+        }
+        if ($trial_end != NULL) {
+            $data['trial_end'] = $trial_end;
+        }
+        if ($card_id != NULL) {
+            $data['card_id'] = $card_id;
         }
         return $this->post('/update/subscription',$data);
     }
