@@ -18,6 +18,9 @@ class PayWhirl {
     protected $_api_key;
     protected $_api_secret;
 
+    // @var bool Verify SSL certificate
+    protected $_verify_ssl = true;
+
     // @var string The base URL for the PayWhirl API.
     protected $_api_base = 'https://api.paywhirl.com';
 
@@ -27,10 +30,11 @@ class PayWhirl {
      * @param string $api_key    Your Paywhirl API Key
      * @param string $api_secret Your PayWhirl API Secret
      */
-    public function __construct($api_key, $api_secret, $api_base = false) {
+    public function __construct($api_key, $api_secret, $api_base = null, $verify_ssl = true) {
         //set API key and secret
         $this->_api_key = $api_key;
         $this->_api_secret = $api_secret;
+        $this->_verify_ssl = $verify_ssl;
 
         if ($api_base) {
             $this->_api_base = $api_base;
@@ -684,43 +688,48 @@ class PayWhirl {
     }
 
     /**
-     * Send POST request.
+     * Send API request.
      */
-    public function post($endpoint, $params = []) {
+    protected function request($method, $endpoint, $params = []) {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['api_key: '.$this->_api_key, 'api_secret: '.$this->_api_secret]);
-        curl_setopt($ch, CURLOPT_URL, $this->_api_base.$endpoint);
-        curl_setopt($ch, CURLOPT_POST, 1);
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'api_key: '.$this->_api_key,
+            'api_secret: '.$this->_api_secret,
+        ]);
+
+        if ($method === 'get') {
+            curl_setopt($ch, CURLOPT_URL, $this->_api_base.$endpoint.'?'.http_build_query($params));
+        } elseif ($method === 'post') {
+            curl_setopt($ch, CURLOPT_URL, $this->_api_base.$endpoint);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
+        } else {
+            throw new InvalidArgumentException("Method must be either 'get' or 'post'");
+        }
+
         curl_setopt($ch, CURLOPT_VERBOSE, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, $this->_verify_ssl ? 2 : 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->_verify_ssl ? 2 : 0);
 
-        curl_setopt($ch, CURLOPT_POSTFIELDS,
-         http_build_query($params));
-        // receive server response
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $server_output = curl_exec($ch);
-
+        $output = curl_exec($ch);
         curl_close($ch);
 
-        return json_decode($server_output);
+        return json_decode($output);
+    }
+
+    /**
+     * Send POST request.
+     */
+    protected function post($endpoint, $params = []) {
+        return $this->request('post', $endpoint, $params);
     }
 
     /**
      * Send GET request.
      */
-    public function get($endpoint, $params = []) {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['api_key: '.$this->_api_key, 'api_secret: '.$this->_api_secret]);
-        $query = http_build_query($params);
-        curl_setopt($ch, CURLOPT_URL, $this->_api_base.$endpoint.'?'.$query);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $output = curl_exec($ch);
-
-        curl_close($ch);
-
-        return json_decode($output);
+    protected function get($endpoint, $params = []) {
+        return $this->request('get', $endpoint, $params);
     }
 }
