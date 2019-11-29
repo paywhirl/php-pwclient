@@ -442,7 +442,7 @@ class PayWhirl {
      * @return bool
      */
     public function deleteInvoice($id) {
-        $data['id'] = $id;
+        $data = ['id' => $id];
 
         return $this->post('/delete/invoice', $data);
     }
