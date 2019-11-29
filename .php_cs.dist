@@ -1,0 +1,24 @@
+<?php
+
+/*
+ * See https://github.com/FriendsOfPHP/PHP-CS-Fixer for available rules
+ */
+
+$finder = PhpCsFixer\Finder::create()
+    ->in('PayWhirl')
+;
+
+return PhpCsFixer\Config::create()
+    ->setRiskyAllowed(true)
+    ->setUsingCache(false)
+    ->setFinder($finder)
+    ->setRules([
+        '@PSR1' => true,
+        '@PSR2' => true,
+        '@Symfony' => true,
+        'braces' => [
+             'position_after_functions_and_oop_constructs' => 'same',
+        ],
+    	'yoda_style' => null,
+    ])
+;

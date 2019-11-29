@@ -1,7 +1,0 @@
-# ignore everything
-*
-
-# don't ignore these files though
-!.gitignore
-!PayWhirl.php
-!README.md
