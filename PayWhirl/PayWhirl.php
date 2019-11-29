@@ -347,12 +347,8 @@ class PayWhirl {
      *
      * @return Invoices Object
      */
-    public function getInvoices($id, $all = 0) {
-        if ($all != 0) {
-            $data = [
-                'all' => $all,
-            ];
-        }
+    public function getInvoices($id, $all = false) {
+        $data = ['all' => $all ? '1' : null];
 
         return $this->get('/invoices/'.$id, $data);
     }
