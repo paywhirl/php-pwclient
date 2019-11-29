@@ -162,12 +162,8 @@ class PayWhirl {
      *
      * @return Questions Array of Objects
      */
-    public function getQuestions($data = 100) {
-        if (is_int($data) == true) {
-            $tempData = ['limit' => $data];
-
-            return $this->get('/questions', $tempData);
-        }
+    public function getQuestions($data_or_limit = 100) {
+        $data = is_int($data_or_limit) ? ['limit' => $data_or_limit] : $data_or_limit;
 
         return $this->get('/questions', $data);
     }
