@@ -362,7 +362,7 @@ class PayWhirl {
      * @return Invoice Object
      */
     public function processInvoice($invoice_id, $data = []) {
-        return $this->post("/invoices/{$invoice_id}/process", $data);
+        return $this->post("/invoice/{$invoice_id}/process", $data);
     }
 
     /**
@@ -373,7 +373,7 @@ class PayWhirl {
      * @return Invoice Object
      */
     public function markInvoiceAsPaid($invoice_id) {
-        return $this->post("/invoices/{$invoice_id}/mark-as-paid");
+        return $this->post("/invoice/{$invoice_id}/mark-as-paid");
     }
 
     /**
@@ -385,7 +385,7 @@ class PayWhirl {
      * @return Invoice Object
      */
     public function addPromoCodeToInvoice($invoice_id, $promo_code) {
-        return $this->post("/invoices/{$invoice_id}/add-promo", ['promo_code' => $promo_code]);
+        return $this->post("/invoice/{$invoice_id}/add-promo", ['promo_code' => $promo_code]);
     }
 
     /**
@@ -396,7 +396,7 @@ class PayWhirl {
      * @return Invoice Object
      */
     public function removePromoCodeFromInvoice($invoice_id) {
-        return $this->post("/invoices/{$invoice_id}/remove-promo");
+        return $this->post("/invoice/{$invoice_id}/remove-promo");
     }
 
     /**
@@ -408,7 +408,7 @@ class PayWhirl {
      * @return Invoice Object
      */
     public function updateInvoiceCard($invoice_id, $card_id) {
-        return $this->post("/invoices/{$invoice_id}/card", $card_id);
+        return $this->post("/invoice/{$invoice_id}/card", $card_id);
     }
 
     /**
@@ -420,7 +420,7 @@ class PayWhirl {
      * @return Invoice Object
      */
     public function updateInvoiceItems($invoice_id, $line_items) {
-        return $this->post("/invoices/{$invoice_id}/items", $line_items);
+        return $this->post("/invoice/{$invoice_id}/items", $line_items);
     }
 
     /**
