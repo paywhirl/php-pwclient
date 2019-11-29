@@ -173,7 +173,9 @@ class PayWhirl {
      *
      * @return Answer Array of Objects
      */
-    public function getAnswers($data) {
+    public function getAnswers($data_or_customer_id) {
+        $data = is_int($data_or_customer_id) ? ['customer_id' => $data_or_customer_id] : $data_or_customer_id;
+
         return $this->get('/answers', $data);
     }
 
