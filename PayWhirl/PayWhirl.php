@@ -69,7 +69,7 @@ class PayWhirl {
      * @return Customer Object
      */
     public function getAddresses($id) {
-        return $this->get('/customer/addresses'.$id);
+        return $this->get('/customer/addresses/'.$id);
     }
 
     /**
@@ -80,7 +80,7 @@ class PayWhirl {
      * @return Customer Object
      */
     public function getAddress($id) {
-        return $this->get('/customer/address'.$id);
+        return $this->get('/customer/address/'.$id);
     }
 
     /**
@@ -91,7 +91,7 @@ class PayWhirl {
      * @return Customer Object
      */
     public function getProfile($id) {
-        return $this->get('/customer/profile'.$id);
+        return $this->get('/customer/profile/'.$id);
     }
 
     /**
@@ -137,7 +137,8 @@ class PayWhirl {
      * @return bool
      */
     public function deleteCustomer($id, $forget = null) {
-        $data['id'] = $id;
+        $data = ['id' => $id];
+
         if (!is_null($forget)) {
             $data['forget'] = $forget;
         }
