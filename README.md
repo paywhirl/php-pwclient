@@ -12,6 +12,7 @@ functionality added, feel free to submit an issue or a pull request.
   [PayWhirl]: https://app.paywhirl.com/
   [PHP]: http://www.php.net/
   [Documentation]: https://api.paywhirl.com/
+
 ### Usage Guide
 
 - [Documentation]
@@ -29,22 +30,33 @@ functionality added, feel free to submit an issue or a pull request.
 
 ## Installation
 
-Place the `.php` file in your project and import the class so that you can 
-instantiate a PayWhirl object. 
+The recommended way of including this package in your project is by using Composer:
 
-When you create a new PayWhirl object you need to pass in your API key and 
-secret, which can be found in the [API key section of the main site](https://app.paywhirl.com/api-keys).
+```sh
+$ composer require paywhirl/paywhirl
 ```
-// include PayWhirl PHP SDK
-require_once("PayWhirl.php");
+
+Make sure to use Composer's autoload:
+
+```php
+require_once __DIR__ . '/vendor/autoload.php';
+```
+
+## Usage
+
+To create a new PayWhirl object, you need to pass in your API key and 
+secret, which can be found in the [API key section of the main site](https://app.paywhirl.com/api-keys).
+
+```php
+use PayWhirl\PayWhirl;
 
 $api_key = "pwpk_xxxxxxxxxxxxxxx";
 $api_secret = "pwpsk_xxxxxxxxxxx";
 
-$payWhirl = new \PayWhirl\PayWhirl($api_key, $api_secret);
+$paywhirl = new \PayWhirl\PayWhirl($api_key, $api_secret);
+
+print_r($paywhirl->getAccount());
 ```
-
-
 
 ## License
 
