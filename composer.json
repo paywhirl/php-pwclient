@@ -1,5 +1,7 @@
 {
-    "name": "paywhirl/php-pwclient",
+    "name": "paywhirl/paywhirl",
+    "description": "PayWhirl API client",
+    "license": "MIT",
     "autoload": {
         "psr-0" : {
             "PayWhirl" : "."
