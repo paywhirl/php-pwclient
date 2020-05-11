@@ -689,8 +689,8 @@ class PayWhirl {
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'api_key: '.$this->_api_key,
-            'api_secret: '.$this->_api_secret,
+            'api-key: '.$this->_api_key,
+            'api-secret: '.$this->_api_secret,
         ]);
 
         if ($method === 'get') {
