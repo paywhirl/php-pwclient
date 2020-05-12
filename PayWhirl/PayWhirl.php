@@ -84,6 +84,40 @@ class PayWhirl {
     }
 
     /**
+     * Create a customer address.
+     *
+     * @param array $data Address data
+     *
+     * @return Address Object
+     */
+    public function createAddress(array $data) {
+        return $this->post('/customer/address/', $data);
+    }
+
+    /**
+     * Update a customer address.
+     *
+     * @param int   $id   Address ID
+     * @param array $data Address data
+     *
+     * @return Address Object
+     */
+    public function updateAddress(int $id, array $data) {
+        return $this->patch('/customer/address/'.$id, $data);
+    }
+
+    /**
+     * Delete a customer address.
+     *
+     * @param int $id Address ID
+     *
+     * @return bool
+     */
+    public function deleteAddress($id) {
+        return $this->delete('/customer/address/'.$id);
+    }
+
+    /**
      * Get a full customer profile by customer ID or email (customer, addresses, and profile questions).
      *
      * @param int $id Address ID
@@ -699,8 +733,15 @@ class PayWhirl {
             curl_setopt($ch, CURLOPT_URL, $this->_api_base.$endpoint);
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
+        } elseif ($method === 'patch') {
+            curl_setopt($ch, CURLOPT_URL, $this->_api_base.$endpoint);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
+        } elseif ($method === 'delete') {
+            curl_setopt($ch, CURLOPT_URL, $this->_api_base.$endpoint);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
         } else {
-            throw new InvalidArgumentException("Method must be either 'get' or 'post'");
+            throw new InvalidArgumentException("Method must be 'get', 'post', 'patch' or 'delete'");
         }
 
         curl_setopt($ch, CURLOPT_VERBOSE, false);
@@ -719,6 +760,20 @@ class PayWhirl {
      */
     protected function post($endpoint, $params = []) {
         return $this->request('post', $endpoint, $params);
+    }
+
+    /**
+     * Send PATCH request.
+     */
+    protected function patch($endpoint, $params = []) {
+        return $this->request('patch', $endpoint, $params);
+    }
+
+    /**
+     * Send DELETE request.
+     */
+    protected function delete($endpoint) {
+        return $this->request('delete', $endpoint);
     }
 
     /**
