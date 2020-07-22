@@ -259,11 +259,12 @@ class PayWhirl {
      * Get a list of subscriptions for a customer.
      *
      * @param int $id Customer ID
+     * @param string $status
      *
      * @return Subscription List Object
      */
-    public function getSubscriptions($id) {
-        return $this->get('/subscriptions/'.$id);
+    public function getSubscriptions($id, $status = 'active') {
+        return $this->get('/subscriptions/'.$id, ['status' => $status]);
     }
 
     /**
