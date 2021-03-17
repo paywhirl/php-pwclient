@@ -376,6 +376,16 @@ class PayWhirl {
     }
 
     /**
+     * @param int $id
+     * @param int $nextPaymentAttemptTimestamp
+     * @return Invoice Object
+     */
+    public function updateInvoiceNextPaymentAttempt($id, $nextPaymentAttemptTimestamp)
+    {
+        return $this->post("/invoices/{$id}/next-payment-date", ['next_payment_attempt' => $nextPaymentAttemptTimestamp]);
+    }
+
+    /**
      * Get a list of upcoming invoices for a customer.
      *
      * @param int $id Customer ID
