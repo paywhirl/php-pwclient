@@ -381,7 +381,7 @@ class PayWhirl {
      * @param bool $all
      * @return Invoice Object
      */
-    public function updateInvoiceNextPaymentAttempt($id, $nextPaymentAttemptTimestamp, $all = false)
+    public function updateInvoiceNextPaymentAttempt($id, $nextPaymentAttemptTimestamp, $all = 0)
     {
         return $this->post("/invoices/{$id}/next-payment-date", [
             'next_payment_attempt' => $nextPaymentAttemptTimestamp,
